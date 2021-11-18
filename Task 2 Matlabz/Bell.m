@@ -5,16 +5,19 @@ boost = 20;
 k = 3*((boost -1)/(boost + 1));
 
 FreqRange = [300 16000]; %band edge frequencies
-Wc = 2*pi*FreqRange(2);
-Wp = [tan((2*pi*FreqRange(1))/(2*Fs)) tan((2*pi*FreqRange(2))/(2*Fs))]; 
-Wo2 = Wp(1)*Wp(2);
+Wc = 2*pi*FreqRange(2); %convert upper cutoff to radians
+Wp = [tan((2*pi*FreqRange(1))/(2*Fs)) tan((2*pi*FreqRange(2))/(2*Fs))]; %prewarp cutoff frequencies
+Wo2 = Wp(1)*Wp(2); %calculate Wo2
 Wo =  2*pi*Fo;
 
-Bw = (2*pi*(FreqRange(2) -FreqRange(1)))/Fs;
+Bw = (2*pi*(FreqRange(2) -FreqRange(1)))/Fs; %calculate bandwidth and convert to rads per sample
 
 
-HSnum = [1 ((3+k)*(Wo/Qfac)) (Wo2)];
-HSden = [1 ((3-k)*(Wo/Qfac)) (Wo2)];
+HSnum = [1 ((3+k)*(Wo/Qfac)) (Wo2)]; %continuous transfer function numerator
+HSden = [1 ((3-k)*(Wo/Qfac)) (Wo2)]; %continuous transfer function denominator
+
+disp(HSnum);
+disp(HSden);
 
 figure(1);
 [Ha, Wa] = freqs(HSnum, HSden); %plot continuous freq response
