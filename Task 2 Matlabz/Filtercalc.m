@@ -1,8 +1,5 @@
 function  [L, b, a] = FilterCalc(Fs, Fo, Qfac, boost) %inputs are sampling frequency, centre frequency, quality factor and boost level
 %function create a digital bell filter based on frequency and quality
-%factor inputs
-%plots the magnitude response of the filter at different boost/cut levels
-
 
 L = length(boost); %calculate vector length
 

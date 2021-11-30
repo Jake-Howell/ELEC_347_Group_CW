@@ -1,3 +1,5 @@
+%script for testing the frequency response of the bell filter at a set range of
+%boost and cut levels, with a variable centre frequency input
 clc
 clear all
 
@@ -17,6 +19,7 @@ sld.Value = 8150;
 function sliderMoving(event, boost)
   
     F0update = event.Value;
+    disp(F0update);
     FilterPlot(96000, F0update, 2, boost);
 
 end

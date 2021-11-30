@@ -1,6 +1,8 @@
 function FilterPlot(Fs, F0, Qfac, boost)
 %calculates and plots the frequency response of a bell filter given
 %sampling frequency, centre frequency and boost/cut
+
+%calculate filter coefficients 
 [L, b, a] = FilterCalc(Fs, F0, Qfac, boost); 
 
 figure(1); %create plot figure for the frequency response
@@ -8,7 +10,7 @@ figure(1); %create plot figure for the frequency response
 clf
 ylabel('Magnitude (dB)')
 xlabel('Frequency (Hz)')
-axis([0 Fs -20 20]); %x-axis from 0 to 96Khz, y-axis from -20 to dB
+axis([0 Fs -20 20]); %x-axis from 0 to Fs, y-axis from -20 to 20dB
 grid on;
 hold on
 
