@@ -1,0 +1,15 @@
+#################################################################################
+A simple GUI that plots the response and the coefficients for a given input.
+Further docs to follow.
+#################################################################################
+Initial release: 01.12.2021
+Build & initial testing : MMI
+Rev: AM
+Version:1.0.0
+Build: 3
+#################################################################################
+Comments:
+Version released to change control. Deleted from OneDrive -> L2. 
+Older versions in ELEC347->L2.
+#################################################################################
+

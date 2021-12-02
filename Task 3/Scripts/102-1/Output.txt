@@ -1,0 +1,11 @@
+#################################################################################
+Python script for coefficient calculations.
+
+CURRENTLY NOT WORKING
+
+#################################################################################
+Comments:
+Version released to change control. Deleted from OneDrive.
+Older versions in PythonWork
+#################################################################################
+
