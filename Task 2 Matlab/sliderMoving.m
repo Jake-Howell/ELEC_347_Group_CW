@@ -1,8 +1,9 @@
-function sliderMoving(event, boost)
+function sliderMoving(event, Fs, Qfac, boost)
   
-    F0update = event.Value;
-    disp(F0update);
-    FilterPlot(96000, F0update, 2, boost);
+    %replot filter response when slider is moved
+    F0update = event.Value; %get new centre frequency from slider
+    disp(F0update); %display value
+    FilterPlot(Fs, F0update, Qfac, boost); %replot response
 
 end
 

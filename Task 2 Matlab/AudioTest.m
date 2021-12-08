@@ -13,7 +13,7 @@ duration = 5; %clip duration in seconds
 AudioFiles44k = {'440737__lamont-roberts__sweep001.wav', '419028__realdavidfloat__kick-snare-loops-reverb-variations-120bpm.wav'}; 
 AudioFiles48k = {'448213__florianreichelt__white-noise.wav', '63378__casualsamples__bajos-22.wav'}; 
 
-%TURN DOWN VOLUME IF USING HEADPHONES - THIS CAN HURT YOUR EARS
+%TURN DOWN VOLUME IF USING THE FREQUENCY SWEEP FILE IT IS VERY LOUD
 FilterTest(Fs(2), F0, Qfac, boost, AudioFiles48k, 2, duration);
 %                                                ^^^ this variable
 %controls which file from the audio file array you wish to play

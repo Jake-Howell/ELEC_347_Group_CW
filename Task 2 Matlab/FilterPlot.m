@@ -8,8 +8,8 @@ function FilterPlot(Fs, F0, Qfac, boost)
 figure(1); %create plot figure for the frequency response
 
 clf
-ylabel('Magnitude (dB)')
-xlabel('Frequency (Hz)')
+ylabel('Magnitude (dB)') %label y axis
+xlabel('Frequency (Hz)') %label x axis
 axis([0 Fs -20 20]); %x-axis from 0 to Fs, y-axis from -20 to 20dB
 grid on;
 hold on

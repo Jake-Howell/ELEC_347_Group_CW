@@ -1,5 +1,6 @@
 function  [L, b, a] = FilterCalc(Fs, Fo, Qfac, boost) %inputs are sampling frequency, centre frequency, quality factor and boost level
-%function create a digital bell filter based on frequency and quality
+%calculate the coefficients for a range of bell filters with different
+%boost and cut levels
 
 L = length(boost); %calculate vector length
 
@@ -21,7 +22,7 @@ HSden = zeros(L,3);
 b = zeros(L,3);
 a = zeros(L,3);
 
-for i = 1:L %repeat for number of steps
+for i = 1:L %repeat for number of gain steps
     
     Wo(i) =  2*pi*Fo; %calculate centre frequency in Radians per second
     Wo2(i) = Wo(i)^2; %centre frequency in Rads/s squared
