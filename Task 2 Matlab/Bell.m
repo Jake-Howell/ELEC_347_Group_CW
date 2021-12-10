@@ -5,9 +5,9 @@ clear all
 
 %filter specifications
 Fs = 96000; %sampling frequency
-F0 = 8150; %centre frequency
-Qfac = 2; %quality factor
-boost = -20:4:20; %boost/cut
+F0 = 1000; %centre frequency
+Qfac = 10; %quality factor
+boost = 4; %boost/cut
 
 %plot filter
 FilterPlot(Fs, F0, Qfac, boost);

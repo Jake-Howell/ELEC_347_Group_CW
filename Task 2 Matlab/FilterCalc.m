@@ -31,7 +31,11 @@ for i = 1:L %repeat for number of gain steps
     HSden(i,:) = [1 ((3-k(i))*(Wo(i)/Qfac)) (Wo2(i))]; %calculate continuous transfer function denominator
      
     [b(i,1:3), a(i,1:3)] = bilinear(HSnum(i,1:3), HSden(i,1:3), Fs, Fo); %calc BZT coefficients for each iteration of the continuous TF
-
+    disp(" ");
+    disp("B");
+    disp(b);
+    disp("A:");
+    disp(a);
 end
 
 end

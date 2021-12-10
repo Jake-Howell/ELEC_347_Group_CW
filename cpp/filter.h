@@ -11,9 +11,9 @@ typedef struct {
 
 class Filter{
 	public:
-		Filter(unsigned int Fs, unsigned int Fo, unsigned int Qfac, unsigned int boost);
+		Filter(unsigned int Fs, unsigned int Fo, unsigned int Q, int boost);
 		void FilterCalc();
-		unsigned short FilterStream(short newSample);
+		short FilterStream(short newSample);
 		coeffs_t getCoeffs(void);
 		void setCoeffs(coeffs_t coeffs);
 		
@@ -22,9 +22,9 @@ class Filter{
 	
 	private:
 		void BZT(float HSnum[], float HSden[]);
-		unsigned int Fs, Fo, Qfac, boost;
-		float a[3] = {0,0,0}, b[3] = {0,0,0};					//Filter coeff's
-		short x[3] = {0,0,0}, y[3] = {0,0,0};					//input and output samples
+		unsigned int Fs, Fo, Q, boost;
+		float a[3] = {1.0f, -1.8657f, 0.8747f}, b[3] = {0.9436f, -1.8657f, 0.9311f};					//Filter coeff's
+		float x[3] = {0,0,0}, y[3] = {0,0,0};					//input and output samples
 		unsigned short n = 0;
 		
 		

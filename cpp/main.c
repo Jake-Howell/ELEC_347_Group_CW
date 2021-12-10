@@ -13,9 +13,9 @@ extern "C" {
 
 #define BUFF_SIZE 6
 #define SAMP_FREQ 96000
-#define CEN_FREQ	10000
-#define Q_FAC			5
-#define BOOST			3
+#define CEN_FREQ	1500
+#define Q_FAC			4
+#define BOOST			-4
 
 unsigned int newSampleFlag;
 char usart_char;
@@ -48,16 +48,17 @@ int main(){
 	
 	char stringBuff[80];
 	unsigned short input_x = 0, output_y = 0;
-	coeffs_t c = bell.getCoeffs();
-	sprintf(stringBuff, "\r\na1: %4.2f  a2: %4.2f a3: %4.2f\r\nb1: %4.2f b2: %4.2f b3: %4.2f\r\n",c.a[0],c.a[1],c.a[2],c.b[0], c.b[1],c.b[2]);
+	coeffs_t c;
+//	coeffs_t c = bell.getCoeffs();
+//	sprintf(stringBuff, "\r\nA: %4.3f  \t %4.3f \t\t %4.3f\r\nB: %4.3f \t %4.3f \t\t %4.3f\r\n",c.a[0],c.a[1],c.a[2],c.b[0], c.b[1],c.b[2]);
 	updateLCD("Real Time EQ :)",0);
-	usart_print(stringBuff);
-	coeffs_t cNew = {{1.0f, -1.3781f, 0.7370f},{1.0542f, -1.3781f, 0.6828f}};
-	
-	bell.setCoeffs(cNew);
+//	usart_print(stringBuff);
+//	//coeffs_t cNew = {{1.0f, -1.9045f, 0.9137f},{0.9841f, -1.9045f, 0.9297f}};
+//	
+//	bell.setCoeffs(cNew);
 	
 	c = bell.getCoeffs();
-	sprintf(stringBuff, "\r\nNEW\r\na1: %4.2f  a2: %4.2f a3: %4.2f\r\nb1: %4.2f b2: %4.2f b3: %4.2f\r\n",c.a[0],c.a[1],c.a[2],c.b[0], c.b[1],c.b[2]);
+	sprintf(stringBuff, "\r\nA: %4.3f  \t %4.3f \t %4.3f\r\nB: %4.3f \t %4.3f \t %4.3f\r\n",c.a[0],c.a[1],c.a[2],c.b[0], c.b[1],c.b[2]);
 	usart_print(stringBuff);
 	
 	
@@ -65,12 +66,12 @@ int main(){
 		
 		while (newSampleFlag == 1){
 			//Set_C(2,0);
-			input_x = mic.read();
-//			head = (head + 1)%BUFF_SIZE;
+			input_x = mic.read()-2048;
 			
 			output_y = bell.FilterStream(input_x);
 			
-			speaker.output(output_y);
+			speaker.output(output_y+2047);
+			
 //			tail = (tail + 1)%BUFF_SIZE;
 			
 			newSampleFlag = 0;
