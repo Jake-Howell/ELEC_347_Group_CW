@@ -1,3 +1,9 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
 #include "filter.h"
 
 Filter::Filter(unsigned int Fs, unsigned int Fo, unsigned int Q, int boost){
@@ -8,7 +14,7 @@ Filter::Filter(unsigned int Fs, unsigned int Fo, unsigned int Q, int boost){
 	FilterCalc();					//calculate filter coeff's 'a' and 'b'
 }
 
-void Filter::FilterCalc(){
+void Filter::FilterCalc(){				//Function not used
 	short G,K;
 	float Wo, Wo2;						//Center Freq in rads per second, wo2 is Wo squared
 	//float HSnum[3], HSden[];	//Continuous time transfer functions
@@ -26,7 +32,7 @@ void Filter::FilterCalc(){
 	
 }
 
-void Filter::BZT(float HSnum[], float HSden[]){
+void Filter::BZT(float HSnum[], float HSden[]){		//Function not used
 	a[0] = (HSden[0] + HSden[1] + HSden[2]); 
 	a[1] = (2*(-HSden[0] + HSden[2]))/a[0]; 
 	a[2] = (HSden[0] - HSden[1] + HSden[2])/a[0]; 
@@ -38,9 +44,11 @@ void Filter::BZT(float HSnum[], float HSden[]){
 	a[0] =1;
 }
 
-short Filter::FilterStream(short newSample){
-	float Y = 0.0f;
+short Filter::FilterStream(short newSample){	//take current sample, return output
+	float Y = 0.0f;															//
 	
+	
+	//shift buffer values
 	x[2]=x[1];
 	x[1]=x[0];
 	x[0] = (float)newSample;
@@ -48,24 +56,22 @@ short Filter::FilterStream(short newSample){
 	y[2]=y[1];
 	y[1]=y[0];
 	
+	
+	//perform MAC opperations with coeffs and samples
 	Y = ( 
 			-(a[1]*y[1]) 
 			-(a[2]*y[2])
-			+(b[0]	*x[0]	 ) 
+			+(b[0]*x[0]) 
 			+(b[1]*x[1]) 
 			+(b[2]*x[2])
 			);	//current filtered output
 
-	y[0] = Y;
-	
-	//n = (n + 1)%3;
-	
-	
-	
-	return (short)Y;
+	y[0] = Y;					//copy to y buffer
+		
+	return (short)Y;	//return sample in as short
 }
 	
-coeffs_t Filter::getCoeffs(void){
+coeffs_t Filter::getCoeffs(void){		//return current coeffs 
 	coeffs_t coeffs;
 	coeffs.a[0] = a[0]; 
 	coeffs.a[1] = a[1]; 
@@ -76,7 +82,7 @@ coeffs_t Filter::getCoeffs(void){
 	return coeffs;
 }
 
-void Filter::setCoeffs(coeffs_t coeffs){
+void Filter::setCoeffs(coeffs_t coeffs){	//update coeffs
 	
 	this->a[0] = coeffs.a[0]; 
 	this->a[1] = coeffs.a[1]; 

@@ -1,5 +1,14 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
 #ifndef _FILTER_H__
 #define _FILTER_H__
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include <stm32f4xx.h>
 #include <math.h>
 #define pi 3.14159265358979323846f
@@ -31,5 +40,7 @@ class Filter{
 		
 };
 
-
+#ifdef __cplusplus
+}
+#endif
 #endif

@@ -1,3 +1,10 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
+
 #ifndef _DAC_ADC_H
 #define _DAC_ADC_H
 #ifdef __cplusplus
@@ -7,15 +14,6 @@ extern "C" {
 #include <stm32f4xx.h>
 #include "math.h"		
 
-//#define ADC_input_port			GPIOB	//define port for potentiometer
-//#define ADC_input_L_pin				0			//define potentiometer pin number
-//#define ADC_Channel				8			//define potentiometer chanel
-//#define ADC_res 4096								//define resoloution of ADC (12-bit)
-
-
-//											
-//#define DAC_port	GPIOA							//define
-//#define DAC_pin		5
 
 class AnalogOut{
 	

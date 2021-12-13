@@ -1,9 +1,13 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
+
 #include <stm32f4xx.h>		//INCLUDE THE HEADER FILE FOR THIS MCU FAMILY
 #include "Delay.h"
-/*void Toggle_BPin(int pin)
-{
-	GPIOB->ODR ^= (0x1<<pin);							//Toggle_BPin Any GPIOB pin using XOR
-}*/
+
 
 void buzzer_PWM(unsigned int period_us){
 	RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;	//ENABLE tim1 to run on APB2 (Advanced Perphieral Bus 2's clock tick) - 90MHz in this case

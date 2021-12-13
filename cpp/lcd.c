@@ -1,4 +1,9 @@
-
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
 #include "lcd.h"
 #include "Delay.h"
 //void lcd_delayus(unsigned int us)		//blocking delay for LCD, argument is approximate number of micro-seconds to delay

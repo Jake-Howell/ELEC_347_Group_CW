@@ -1,3 +1,10 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
+
 #include "DAC-ADC.h"
 #ifdef __cplusplus
 extern "C" {
@@ -6,7 +13,7 @@ extern "C" {
 AnalogOut::AnalogOut(char port, unsigned short pin){
 	this->port = port;
 	this->pin = pin;
-	init_DAC();
+	init_DAC();								//initalise DAC when object initalised
 }
 
 

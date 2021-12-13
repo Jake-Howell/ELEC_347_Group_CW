@@ -1,3 +1,10 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
+
 #include "LED.h"
 
 void Init_LEDs(void){

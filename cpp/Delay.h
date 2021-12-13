@@ -1,3 +1,9 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
 #ifndef __DELAY_H
 #define __DELAY_H
 #ifdef __cplusplus

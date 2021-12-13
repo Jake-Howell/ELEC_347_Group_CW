@@ -1,3 +1,10 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
+
 #ifndef _LCD_H_
 #define _LCD_H_
 #ifdef __cplusplus

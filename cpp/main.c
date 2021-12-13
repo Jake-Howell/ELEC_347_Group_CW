@@ -1,8 +1,13 @@
+/*
+Program written by Jacob Howell
+December, 2021
+Module: ELEC 347
+Task 4: Real Time Implementation of parametric EQ
+*/
+
 #include 	<stm32f4xx.h>
 #include 	"Delay.h"
 #include 	"lcd.h"
-#include 	"LED.h"
-#include	"usart.h"
 #include 	"DAC-ADC.h"
 #include	"filter.h"
 #include 	"PLL_Config.c"
@@ -18,78 +23,40 @@ extern "C" {
 #define BOOST			-4
 
 unsigned int newSampleFlag;
-char usart_char;
 
-AnalogIn 		mic('A', 6, 6);		//port, pin, chanel // MP3 Right
-//AnalogIn 		mic('A', 3, 3);		//mic teat
-AnalogOut 	speaker('A', 5);	//port, pin
-Filter bell(SAMP_FREQ, CEN_FREQ, Q_FAC, BOOST);
+
+AnalogIn 		mic('A', 6, 6);		//port, pin, chanel //select input
+AnalogOut 	speaker('A', 5);	//port, pin					//select output
+Filter bell(SAMP_FREQ, CEN_FREQ, Q_FAC, BOOST);		//create filter object
 
 int main(){
-	PLL_Config();
+	PLL_Config();																//set clock to 180MHz
 	SystemCoreClockUpdate();
 	
 	__disable_irq();
 	
-	Init_LEDs();
-	//timer 2 used for 96KHz sample rate
-	Init_Timer2(9, 107, ENABLE_ISR);
-	//timer 3 is used for creating delays and ticks every us
-	Init_Timer3(PSC_Var_Delay, ARR_Var_Delay, DISABLE_ISR);
+	
+	Init_Timer2(9, 107, ENABLE_ISR);						//timer 2 used for 96KHz sample rate
+	init_LCD();																	//initalise LCD in 4bit mode
 
+	__enable_irq();															//after initalisation, turn on interupts
 	
-	init_LCD();									//initalise LCD in 4bit mode
-	init_USART(115200);					//initalise USART with 115200 baud rate, 1 stop bit, even parity
-	
-
-	
-	__enable_irq();							//after all initalisation, turn on interupts
-	
-	
-	char stringBuff[80];
 	unsigned short input_x = 0, output_y = 0;
-	coeffs_t c;
-//	coeffs_t c = bell.getCoeffs();
-//	sprintf(stringBuff, "\r\nA: %4.3f  \t %4.3f \t\t %4.3f\r\nB: %4.3f \t %4.3f \t\t %4.3f\r\n",c.a[0],c.a[1],c.a[2],c.b[0], c.b[1],c.b[2]);
-	updateLCD("Real Time EQ :)",0);
-//	usart_print(stringBuff);
-//	//coeffs_t cNew = {{1.0f, -1.9045f, 0.9137f},{0.9841f, -1.9045f, 0.9297f}};
-//	
-//	bell.setCoeffs(cNew);
-	
-	c = bell.getCoeffs();
-	sprintf(stringBuff, "\r\nA: %4.3f  \t %4.3f \t %4.3f\r\nB: %4.3f \t %4.3f \t %4.3f\r\n",c.a[0],c.a[1],c.a[2],c.b[0], c.b[1],c.b[2]);
-	usart_print(stringBuff);
+	updateLCD("ELEC 347",0);										//print message to display
+	updateLCD("Real Time EQ",1);
+
 	
 	
 	while(1){
 		
-		while (newSampleFlag == 1){
-			//Set_C(2,0);
-			input_x = mic.read()-2048;
+		while (newSampleFlag == 1){								//Wait for interupt flag
+			input_x 	= mic.read()-2048;						//get next input from ADC
+			output_y 	= bell.FilterStream(input_x);	//pass input through filter (multiple filters can be cascaded)
+			speaker.output(output_y+2047);					//send output to DAC
 			
-			output_y = bell.FilterStream(input_x);
-			
-			speaker.output(output_y+2047);
-			
-//			tail = (tail + 1)%BUFF_SIZE;
-			
-			newSampleFlag = 0;
+			newSampleFlag = 0;											//set sample flag to 0 and exit loop
 		}
-		//Set_C(2,1);
-		
-		
-		
-		//Wait3_ms(5);
-//		
-		//out = buffer[tail];
-		
-//		sprintf(stringBuff,"X: %d\tY: %d\n\r", input_x, output_y);
-//		usart_print(stringBuff);
-		
-		
-		
-
+		__NOP();																	//Do nothing
 	}
 }
 
