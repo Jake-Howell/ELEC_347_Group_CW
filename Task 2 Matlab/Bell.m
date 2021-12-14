@@ -1,13 +1,20 @@
-%script for testing the frequency response of the bell filter at a set range of
+%script for testing the frequency response 
+%of the bell filter at a set range of
 %boost and cut levels, with a variable centre frequency input
 clc
 clear all
 
 %filter specifications
 Fs = 96000; %sampling frequency
+<<<<<<< Updated upstream
 F0 = 1000; %centre frequency
 Qfac = 10; %quality factor
 boost = 4; %boost/cut
+=======
+F0 = 8000; %centre frequency
+Qfac = 5; %quality factor
+boost = -20:4:20; %boost/cut
+>>>>>>> Stashed changes
 
 %plot filter
 FilterPlot(Fs, F0, Qfac, boost);

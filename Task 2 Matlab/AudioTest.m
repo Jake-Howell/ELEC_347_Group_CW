@@ -5,7 +5,7 @@ clear all
 
 Fs = [44100 48000 96000]; %standard sample rates
 F0 = 250; %centre frequency for boosting/cutting
-boost = 0; %boost/cut value
+boost = 4; %boost/cut value
 Qfac = 2; %quality factor
 duration = 5; %clip duration in seconds
 
