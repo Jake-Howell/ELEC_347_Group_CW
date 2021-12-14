@@ -20,7 +20,7 @@ typedef struct {
 
 class Filter{
 	public:
-		Filter(unsigned int Fs, unsigned int Fo, unsigned int Q, int boost);
+		Filter(float coeff_A[3], float coeff_B[3]);
 		void FilterCalc();
 		short FilterStream(short newSample);
 		coeffs_t getCoeffs(void);
@@ -30,7 +30,7 @@ class Filter{
 	
 	
 	private:
-		void BZT(float HSnum[], float HSden[]);
+		void BZT(float HSnum[], float HSden[]);	//Not used
 		unsigned int Fs, Fo, Q, boost;
 		float a[3] = {1.0f, -1.8657f, 0.8747f}, b[3] = {0.9436f, -1.8657f, 0.9311f};					//Filter coeff's
 		float x[3] = {0,0,0}, y[3] = {0,0,0};					//input and output samples

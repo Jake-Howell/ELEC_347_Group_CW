@@ -6,12 +6,11 @@ Task 4: Real Time Implementation of parametric EQ
 */
 #include "filter.h"
 
-Filter::Filter(unsigned int Fs, unsigned int Fo, unsigned int Q, int boost){
-	this->Fs 		= Fs;
-	this->Fo 		= Fo;
-	this->Q 	=	Q;
-	this->boost = boost;
-	FilterCalc();					//calculate filter coeff's 'a' and 'b'
+Filter::Filter(float coeff_A[3], float coeff_B[3]){
+	for (int i = 0; i < 3; i++){
+		this->a[i] = coeff_A[i];
+		this->b[i] = coeff_B[i];
+	}
 }
 
 void Filter::FilterCalc(){				//Function not used
